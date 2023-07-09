@@ -1,0 +1,27 @@
+.turns {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.word {
+  display: flex;
+  gap: 15px;
+}
+
+.letter {
+  display: flex;
+  height: 40px;
+  width: 40px;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  background-color: #1a1a1a;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  text-transform: uppercase;
+}
+
+.letter:empty {
+  opacity: 0.7;
+}

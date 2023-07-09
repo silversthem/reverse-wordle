@@ -1,0 +1,25 @@
+.gameFooter {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.gameOverText {
+  padding: 5px;
+  background-color: #ff002f;
+  border-radius: 6px;
+  width: fit-content;
+}
+
+.gameOverWin {
+  padding: 5px;
+  background-color: #02790e;
+  border-radius: 6px;
+  width: fit-content;
+}
+
+.gameButton button {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
