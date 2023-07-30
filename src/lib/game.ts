@@ -1,7 +1,7 @@
-import words from '../data/words.json';
+import wordsByLettersCount from "../data/words-by-letters";
 
 export function countLetters(word: string) {
-  return word.split('').reduce((acc, letter) => {
+  return word.split("").reduce((acc, letter) => {
     const count = acc.get(letter);
     if (!count) acc.set(letter, 1);
     else acc.set(letter, count + 1);
@@ -46,7 +46,7 @@ export function countLettersInList(
 ) {
   let exclusion = new Map<string, number>();
   if (excludeFromCount) {
-    exclusion = countLetters(excludeFromCount.join(''));
+    exclusion = countLetters(excludeFromCount.join(""));
   }
 
   const lettersCounted = words.reduce((acc, word) => {
@@ -63,15 +63,17 @@ export function countLettersInList(
   return lettersCounted;
 }
 
-function computeFirstLetter() {
-  return countLettersInList(words);
-}
+export function computePossibleWords(
+  letters: number,
+  word: string[],
+  anyPosition?: string,
+) {
+  const words = wordsByLettersCount.get(`${letters}`) ?? [];
 
-export function computePossibleWords(word: string[], anyPosition?: string) {
   const possibleWords = words.filter(w =>
     word
       .map((letter, i) => {
-        if (letter === '.') return true;
+        if (letter === ".") return true;
         return letter === w[i];
       })
       .every(x => x),
@@ -85,7 +87,11 @@ export function computePossibleWords(word: string[], anyPosition?: string) {
   return possibleWords;
 }
 
-const lettersByFrequency = computeFirstLetter();
-export const firstChoice = Array.from(lettersByFrequency.entries())
-  .sort((a, b) => b[1] - a[1])
-  .map(x => x[0]);
+export const firstChoiceByLettersCount = Object.fromEntries(
+  Array.from(wordsByLettersCount.entries()).map(([lettersCount, words]) => [
+    lettersCount,
+    Array.from(countLettersInList(words))
+      .sort((a, b) => b[1] - a[1])
+      .map(x => x[0]),
+  ]),
+);

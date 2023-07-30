@@ -1,42 +1,35 @@
-import './App.css';
-import React from 'react';
-import { computePossibleWords } from './lib/game';
-import { useGame } from './lib/useGame';
-import { Game } from './components/Game';
-import { useRatio } from './lib/useRatio';
-import { Ratio } from './components/Ratio';
+import React from "react";
+import "./App.css";
+import NormalMode from "./components/modes/Normal";
+import ChallengeMode from "./components/modes/Challenge";
+
+type Modes = "normal" | "challenge";
 
 function App() {
-  const { ratio, stats, addToRatio } = useRatio();
-  const { gameState, playSlot, turns, nextLetter, initGame } = useGame({
-    onGameOver: addToRatio,
-  });
-
-  const hasLost = gameState === 'lost';
-
-  const lastTurn = turns.length && turns[turns.length - 1];
-  const lastPossibleWords =
-    hasLost &&
-    turns.length > 2 &&
-    computePossibleWords(turns[turns.length - 2], nextLetter);
-
-  React.useEffect(() => {
-    initGame();
-  }, []);
+  const [mode, setMode] = React.useState<Modes | null>(null);
+  const switchToMode = (m: Modes) => () => setMode(m);
+  const resetMode = () => setMode(null);
 
   return (
     <div className="app">
-      <Game
-        gameState={gameState}
-        nextLetter={nextLetter}
-        turns={turns}
-        playSlot={playSlot}
-        lastTurn={lastTurn}
-        lastPossibleWords={lastPossibleWords}
-        restartGame={initGame}
-      />
-      <div className="appFooter">
-        <Ratio ratio={ratio} stats={stats} />
+      <div className="app-header">
+        <button type="button" onClick={resetMode}>
+          Reverse Wordle
+        </button>
+      </div>
+      <div className="app-body">
+        {mode === "normal" && <NormalMode />}
+        {mode === "challenge" && <ChallengeMode />}
+        {!mode && (
+          <div className="chose-mode">
+            <button type="button" onClick={switchToMode("normal")}>
+              Normal Mode
+            </button>
+            <button type="button" onClick={switchToMode("challenge")}>
+              Challenge Mode
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -17,15 +17,22 @@ html {
   flex-direction: column;
   gap: 25px;
   height: 100%;
+  padding-top: 10dvh;
+  box-sizing: border-box;
 }
 
-.appFooter {
-  /* position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  box-sizing: border-box;
+.app-header {
+  font-size: 2.5rem;
+}
+
+.chose-mode {
   display: flex;
-  justify-content: center;
-*/
+  flex-direction: column;
+  gap: 15px;
+}
+
+.app-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }

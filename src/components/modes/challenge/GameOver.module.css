@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.possibleWords {
+  background-color: rgba(180, 180, 180, 0.1);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.possibleWordsTitle {
+  font-size: 1.1rem;
+}
+
+.possibleWordsList {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.resume {
+  padding: 10px;
+  font-size: 1.5rem;
+  background-color: rgba(0, 255, 120, 0.4);
+  border-radius: 5px;
+}
+
+.overview {
+  padding: 10px;
+  background-color: rgba(240, 240, 240, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 5px;
+}
+
+.overviewTitle {
+  font-size: 1.3rem;
+}
+
+.overviewElement {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
